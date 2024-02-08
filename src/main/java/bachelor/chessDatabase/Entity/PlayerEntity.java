@@ -1,5 +1,6 @@
 package bachelor.chessDatabase.Entity;
 
+import bachelor.chessDatabase.Relationships.GameRelationship;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.data.neo4j.core.schema.Id;
@@ -17,9 +18,5 @@ public class PlayerEntity {
     @Property("Name")
     private final String name;
     @Relationship("played")
-    private Set<GameEntity> games;
-    @Relationship("won_against")
-    private Set<PlayerEntity> playersWonAgainst;
-    @Relationship("lost_to")
-    private Set<PlayerEntity> playersLostTo;
+    private Set<GameRelationship> games;
 }

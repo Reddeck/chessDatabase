@@ -1,11 +1,14 @@
 package bachelor.chessDatabase.Service;
 
+import bachelor.chessDatabase.Entity.PlayerEntity;
+import bachelor.chessDatabase.Repository.PlayerRepository;
 import com.github.bhlangonijr.chesslib.Board;
 import com.github.bhlangonijr.chesslib.game.Game;
 import com.github.bhlangonijr.chesslib.move.Move;
 import com.github.bhlangonijr.chesslib.pgn.PgnHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,18 +16,17 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
-public class FileParsingService implements Runnable{
-    private final GameHandlingService gameHandler = new GameHandlingService();
-    private final ArrayList<String> files;
+@Service
+public class FileParsingService{
+    private final GameHandlingService gameHandler;
 
-    public FileParsingService(String... files){
-        this.files = new ArrayList<>(List.of(files));
+    public FileParsingService(GameHandlingService gameHandler){
+        this.gameHandler = gameHandler;
     }
 
-    @Override
-    public void run() {
-        if (files.isEmpty()) return;
+    public void parseFiles(String... files){
         for (String file : files) {
             PgnHolder pgn = new PgnHolder("games/" + file);
             try {
@@ -34,11 +36,17 @@ public class FileParsingService implements Runnable{
             }
             int count = 0;
 
+            var game = pgn.getGames().get(0);
+            gameHandler.handleGame(game);
+            /*
             for(Game game : pgn.getGames()){
                 count++;
                 gameHandler.handleGame(game);
-                System.out.println(count);
-            }
+                //System.out.println(count);
+            */
+
+            //PLAYER ARE SAVED AND BECAUSE OF ID THEY ARE NOT DUPLICATED
+
         }
     }
 }
