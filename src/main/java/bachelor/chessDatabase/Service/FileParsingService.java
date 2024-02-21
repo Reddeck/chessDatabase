@@ -8,6 +8,8 @@ import com.github.bhlangonijr.chesslib.move.Move;
 import com.github.bhlangonijr.chesslib.pgn.PgnHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -36,17 +38,14 @@ public class FileParsingService{
             }
             int count = 0;
 
-            var game = pgn.getGames().get(0);
-            gameHandler.handleGame(game);
             /*
-            for(Game game : pgn.getGames()){
+            for(Game game : pgn.getGames()) {
                 count++;
-                gameHandler.handleGame(game);
-                //System.out.println(count);
-            */
+                gameHandler.handleGame(game, count);
+            }*/
 
-            //PLAYER ARE SAVED AND BECAUSE OF ID THEY ARE NOT DUPLICATED
-
+            gameHandler.handleGame(pgn.getGames().get(0), 1);
+            System.out.println(count);
         }
     }
 }

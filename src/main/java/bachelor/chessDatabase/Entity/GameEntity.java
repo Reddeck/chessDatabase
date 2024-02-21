@@ -22,6 +22,8 @@ public class GameEntity {
     @GeneratedValue
     private Long id;
     @Property
+    private int gameNumber;
+    @Property
     private int moves;
     @Relationship
     private ResultEntity result;
