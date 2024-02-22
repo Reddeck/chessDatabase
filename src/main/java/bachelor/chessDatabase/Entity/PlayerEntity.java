@@ -17,6 +17,4 @@ public class PlayerEntity {
     @Id
     @Property("Name")
     private final String name;
-    @Relationship("played")
-    private Set<GameRelationship> games;
 }

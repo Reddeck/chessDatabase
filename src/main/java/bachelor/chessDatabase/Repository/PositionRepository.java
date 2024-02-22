@@ -16,7 +16,7 @@ public interface PositionRepository extends Neo4jRepository<PositionEntity, Stri
             WITH start, p
             UNWIND p.next_move as next
             MERGE (end:Position {fen: next.next_position})
-            CREATE (start)-[:next_move {move: next.move}]->(end)
+            MERGE (start)-[:next_move {move: next.move}]->(end)
             """)
     void saveAllPositions(@Param("all") List<Value> positionEntity);
 }

@@ -1,6 +1,7 @@
 package bachelor.chessDatabase.Relationships;
 
 import bachelor.chessDatabase.Entity.GameEntity;
+import bachelor.chessDatabase.Entity.PlayerEntity;
 import bachelor.chessDatabase.Enums.Color;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,10 +21,10 @@ public class GameRelationship {
     @Property
     private Color color;
     @TargetNode
-    private GameEntity game;
+    private PlayerEntity player;
 
-    public GameRelationship (Color color, GameEntity game){
+    public GameRelationship (Color color, PlayerEntity player){
         this.color = color;
-        this.game = game;
+        this.player = player;
     }
 }

@@ -24,6 +24,6 @@ public class ChessDatabaseApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) {
 		log.info("LETS GO");
-		fileParsingService.parseFiles("wrap23.pgn");
+		fileParsingService.parseFiles("test.pgn");
 	}
 }

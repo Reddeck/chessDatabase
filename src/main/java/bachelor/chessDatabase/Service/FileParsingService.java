@@ -37,15 +37,23 @@ public class FileParsingService{
                 throw new RuntimeException(e);
             }
             int count = 0;
-
+            long start = System.currentTimeMillis();
             /*
             for(Game game : pgn.getGames()) {
                 count++;
                 gameHandler.handleGame(game, count);
             }*/
+    /*
+            var all = pgn.getGames();
+            while (count < 100){
+                var game = all.get(count);
+                count++;
+                gameHandler.handleGame(game, count);
+            }*/
 
-            gameHandler.handleGame(pgn.getGames().get(0), 1);
-            System.out.println(count);
+            gameHandler.handleGame(pgn.getGames().get(0), count);
+            //System.out.println(count);
+            System.out.println("Time Taken to process " + count + " games " + (System.currentTimeMillis() - start) + " ms");
         }
     }
 }

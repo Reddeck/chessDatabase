@@ -1,6 +1,7 @@
 package bachelor.chessDatabase.Entity;
 
 import bachelor.chessDatabase.Enums.Result;
+import bachelor.chessDatabase.Relationships.GameRelationship;
 import bachelor.chessDatabase.Relationships.PositionRelationshipWithGame;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,4 +30,6 @@ public class GameEntity {
     private ResultEntity result;
     @Relationship(direction = Relationship.Direction.OUTGOING)
     private Set<PositionRelationshipWithGame> positions;
+    @Relationship(direction = Relationship.Direction.INCOMING)
+    private Set<GameRelationship> played;
 }
