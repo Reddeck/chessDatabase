@@ -52,7 +52,7 @@ public class GameHandlingService {
         this.positionRepository.saveAll(list);
     }
 
-    public void handleGame(Game game, int number){
+    public GameEntity handleGame(Game game, int number){
         GameEntity gameEntity = new GameEntity();
         gameEntity.setGameNumber(number);
         PlayerEntity white = new PlayerEntity(game.getWhitePlayer().getName());
@@ -81,8 +81,9 @@ public class GameHandlingService {
             case "1/2-1/2" -> gameEntity.setResult(new ResultEntity(Result.DRAW));
         }
 
-
-        this.gameRepository.saveAllGames(mapGamesToValues(Set.of(gameEntity)));
+        return gameEntity;
+        //this.gameRepository.saveAllGames(mapGamesToValues(Set.of(gameEntity)));
+        //this.gameRepository.save(gameEntity);
         //this.positionRepository.saveAllPositions(mapPositionsToValues(positions));
         /*
         //this.positionRepository.saveAll(positions);
@@ -145,7 +146,7 @@ public class GameHandlingService {
         return valuesAllPos;
     }
 
-    private List<Value> mapGamesToValues(Set<GameEntity> games){
+    public List<Value> mapGamesToValues(Set<GameEntity> games){
         List<Value> valuesAllGames = new ArrayList<>();
         for(GameEntity game : games){
             Map<String, Object> map = new HashMap<>();

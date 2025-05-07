@@ -12,8 +12,8 @@ public interface GameRepository extends Neo4jRepository<GameEntity, Long> {
 
     @Query("""
             UNWIND $allGames as g
-            MERGE (white:Player {name: g.player_white})
-            MERGE (black:Player {name: g.player_black})
+            MERGE (white:Player {Name: g.player_white})
+            MERGE (black:Player {Name: g.player_black})
             MERGE (game:Game {gameNumber: g.gameNumber, moves: g.moves})
             MERGE (white)-[:played {colour: "white"}]->(game)
             MERGE (black)-[:played {colour: "black"}]->(game)
@@ -29,4 +29,7 @@ public interface GameRepository extends Neo4jRepository<GameEntity, Long> {
             MERGE (start)-[:next_move {move: next.move}]->(end)
             """)
     void saveAllGames(@Param("allGames") List<Value> gameEntities);
+
+
+    //void saveAllOpenings(@Param("allOpenings") List<Value> openingEntities);
 }
