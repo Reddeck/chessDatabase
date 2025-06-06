@@ -19,4 +19,5 @@ public interface PositionRepository extends Neo4jRepository<PositionEntity, Stri
             MERGE (start)-[:next_move {move: next.move}]->(end)
             """)
     void saveAllPositions(@Param("all") List<Value> positionEntity);
+    
 }
